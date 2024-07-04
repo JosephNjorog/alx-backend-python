@@ -138,5 +138,59 @@ def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
     return [(i, len(i)) for i in lst]
 ```
 
+### Task 10: Augment code with duck-typed annotations
+**File:** `100-safe_first_element.py`
+
+I augmented the function `safe_first_element` with the correct duck-typed annotations. The function takes a sequence and returns the first element if it exists, otherwise `None`. I used `Sequence`, `Any`, and `Union` from the `typing` module.
+
+```python
+from typing import Sequence, Any, Union
+
+def safe_first_element(lst: Sequence[Any]) -> Union[Any, None]:
+    if lst:
+        return lst[0]
+    else:
+        return None
+```
+
+### Task 11: More involved type annotations
+**File:** `101-safely_get_value.py`
+
+I added type annotations to the function `safely_get_value`. This function takes a dictionary, a key, and an optional default value, returning the value associated with the key if it exists, otherwise the default value. I used `Mapping`, `Any`, `TypeVar`, and `Union` from the `typing` module.
+
+```python
+from typing import Mapping, Any, Union, TypeVar
+
+T = TypeVar('T')
+
+def safely_get_value(dct: Mapping, key: Any, default: Union[T, None] = None) -> Union[Any, T]:
+    if key in dct:
+        return dct[key]
+    else:
+        return default
+```
+
+### Task 12: Type Checking
+**File:** `102-type_checking.py`
+
+I used `mypy` to validate the code and applied necessary changes. The function `zoom_array` takes a tuple and an integer factor (default is 2), and returns a list where each element in the tuple is repeated `factor` times. I used `Tuple` and `List` from the `typing` module.
+
+```python
+from typing import Tuple, List
+
+def zoom_array(lst: Tuple, factor: int = 2) -> List:
+    zoomed_in: List = [
+        item for item in lst
+        for i in range(factor)
+    ]
+    return zoomed_in
+
+array = (12, 72, 91)
+
+zoom_2x = zoom_array(array)
+
+zoom_3x = zoom_array(array, 3)
+```
+
 ## Conclusion
 Throughout this project, I enhanced my understanding and application of Python variable annotations. By using type hints, I improved code readability and maintainability, ensuring that function signatures and variable types are clear and explicit.
